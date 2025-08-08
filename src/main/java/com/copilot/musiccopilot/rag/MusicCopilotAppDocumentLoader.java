@@ -18,11 +18,11 @@ import java.util.List;
  */
 @Component
 @Slf4j
-public class LoveAppDocumentLoader {
+public class MusicCopilotAppDocumentLoader {
 
     private final ResourcePatternResolver resourcePatternResolver;
 
-    public LoveAppDocumentLoader(ResourcePatternResolver resourcePatternResolver) {
+    public MusicCopilotAppDocumentLoader(ResourcePatternResolver resourcePatternResolver) {
         this.resourcePatternResolver = resourcePatternResolver;
     }
 
@@ -33,7 +33,7 @@ public class LoveAppDocumentLoader {
     public List<Document> loadMarkdowns() {
         List<Document> allDocuments = new ArrayList<>();
         try {
-            Resource[] resources= resourcePatternResolver.getResources("classpath:document/*.md");
+            Resource[] resources= resourcePatternResolver.getResources("classpath:music-document/*.md");
             for (Resource resource : resources) {
                 String filename = resource.getFilename();
                 // 提取文档倒数第 3 和第 2 个字作为标签

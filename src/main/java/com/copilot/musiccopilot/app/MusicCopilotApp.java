@@ -13,6 +13,9 @@ import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
+import org.springframework.ai.rag.generation.augmentation.ContextualQueryAugmenter;
+import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -128,13 +131,13 @@ public class MusicCopilotApp {
     // AI 恋爱知识库问答功能
 
     @Resource
-    private VectorStore MusicCopilotAppVectorStore;
+    private VectorStore musicCopilotAppVectorStore;
 
     @Resource
     private Advisor MusicCopilotAppRagCloudAdvisor;
 
-    @Resource
-    private VectorStore pgVectorVectorStore;
+//    @Resource
+//    private VectorStore pgVectorVectorStore;
 
     @Resource
     private QueryRewriter queryRewriter;
@@ -157,7 +160,7 @@ public class MusicCopilotApp {
                 // 开启日志，便于观察效果
                 .advisors(new MyLoggerAdvisor())
                 // 应用 RAG 知识库问答
-                .advisors(new QuestionAnswerAdvisor(MusicCopilotAppVectorStore))
+                .advisors(new QuestionAnswerAdvisor(musicCopilotAppVectorStore))
                 // 应用 RAG 检索增强服务（基于云知识库服务）
 //                .advisors(MusicCopilotAppRagCloudAdvisor)
                 // 应用 RAG 检索增强服务（基于 PgVector 向量存储）
@@ -212,6 +215,18 @@ public class MusicCopilotApp {
         // 可选：先进行查询改写以优化问答效果
         String rewrittenMessage = queryRewriter.doQueryRewrite(message);
 
+        Advisor retrievalAugmentationAdvisor = RetrievalAugmentationAdvisor.builder()
+                .documentRetriever(VectorStoreDocumentRetriever.builder()
+                        .similarityThreshold(0.50)
+                        .vectorStore(musicCopilotAppVectorStore)
+                        .build())
+                .queryAugmenter(ContextualQueryAugmenter.builder()
+                        // 允许模型在没有文档基础上回答
+                        .allowEmptyContext(true)
+                        .build())
+                .build();
+
+
         // 构建聊天请求
         ChatResponse chatResponse = chatClient
                 .prompt()
@@ -223,7 +238,7 @@ public class MusicCopilotApp {
                 // 启用工具能力
                 .toolCallbacks(allTools)
                 // 启用 RAG 知识库（可按需替换为 CloudRag / PgVector / 自定义）
-                .advisors(new QuestionAnswerAdvisor(MusicCopilotAppVectorStore))
+                .advisors(retrievalAugmentationAdvisor)
                 // 如果你有多个 RAG 实现，可以继续添加如下：
                 //.advisors(MusicCopilotAppRagCloudAdvisor)
                 //.advisors(new QuestionAnswerAdvisor(pgVectorVectorStore))

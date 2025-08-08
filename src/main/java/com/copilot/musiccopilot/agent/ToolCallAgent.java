@@ -3,7 +3,7 @@ package com.copilot.musiccopilot.agent;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
-import com.yupi.yuaiagent.agent.model.AgentState;
+import com.copilot.musiccopilot.agent.model.AgentState;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;

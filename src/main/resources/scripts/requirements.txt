@@ -1,0 +1,5 @@
+pdf2image
+python-dotenv
+requests
+Pillow 
+dashscope 

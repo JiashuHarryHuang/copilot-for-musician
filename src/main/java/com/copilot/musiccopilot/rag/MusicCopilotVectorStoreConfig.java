@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
- * 恋爱大师向量数据库配置（初始化基于内存的向量数据库 Bean）
+ *
  */
 @Configuration
-public class LoveAppVectorStoreConfig {
+public class MusicCopilotVectorStoreConfig {
 
     @Resource
-    private LoveAppDocumentLoader loveAppDocumentLoader;
+    private MusicCopilotAppDocumentLoader musicCopilotAppDocumentLoader;
 
     @Resource
     private MyTokenTextSplitter myTokenTextSplitter;
@@ -26,15 +26,15 @@ public class LoveAppVectorStoreConfig {
     private MyKeywordEnricher myKeywordEnricher;
 
     @Bean
-    VectorStore loveAppVectorStore(EmbeddingModel dashscopeEmbeddingModel) {
+    VectorStore MusicCopilotVectorStore(EmbeddingModel dashscopeEmbeddingModel) {
         SimpleVectorStore simpleVectorStore = SimpleVectorStore.builder(dashscopeEmbeddingModel).build();
         // 加载文档
-        List<Document> documentList = loveAppDocumentLoader.loadPDFs();
+        List<Document> documentList = musicCopilotAppDocumentLoader.loadMarkdowns();
         // 自主切分文档
-        List<Document> splitDocuments = myTokenTextSplitter.splitCustomized(documentList);
+//        List<Document> splitDocuments = myTokenTextSplitter.splitCustomized(documentList);
         // 自动补充关键词元信息
 //        List<Document> enrichedDocuments = myKeywordEnricher.enrichDocuments(documentList);
-        simpleVectorStore.add(splitDocuments);
+        simpleVectorStore.add(documentList);
         return simpleVectorStore;
     }
 }

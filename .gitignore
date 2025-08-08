@@ -15,6 +15,7 @@ target/
 
 .env
 tmp
+.venv
 
 ### IntelliJ IDEA ###
 .idea

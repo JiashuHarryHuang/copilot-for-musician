@@ -1,7 +1,7 @@
 package com.copilot.musiccopilot.agent;
 
 import cn.hutool.core.util.StrUtil;
-import com.yupi.yuaiagent.agent.model.AgentState;
+import com.copilot.musiccopilot.agent.model.AgentState;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;

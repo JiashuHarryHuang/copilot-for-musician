@@ -1,7 +1,7 @@
 package com.copilot.musiccopilot.tools;
 
 import cn.hutool.core.io.FileUtil;
-import com.yupi.yuaiagent.constant.FileConstant;
+import com.copilot.musiccopilot.constant.FileConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -20,24 +20,19 @@ import java.util.Map;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
 public class MusicGenerationTool {
 
     private final RestTemplate restTemplate = new  RestTemplate();
     private final String FILE_DIR = FileConstant.FILE_SAVE_DIR + "/music";
 
-    @Value("${spring.ai.beatoven.api-key}")
-    private String apiKey;
+    private final String apiKey;
 
     private static final String COMPOSE_URL = "https://public-api.beatoven.ai/api/v1/tracks/compose";
     private static final String TASK_STATUS_URL_TEMPLATE = "https://public-api.beatoven.ai/api/v1/tasks/%s";
 
-//    public MusicGenerationTool() {
-//        var factory = new SimpleClientHttpRequestFactory();
-//        factory.setConnectTimeout(5000); // 5 seconds
-//        factory.setReadTimeout(10000);   // 10 seconds
-//        this.restTemplate = new RestTemplate(factory);
-//    }
+    public MusicGenerationTool(@Value("${spring.ai.beatoven.api-key}") String apiKey) {
+        this.apiKey = apiKey;
+    }
 
     @Tool(description = "Generate a short music clip based on user description")
     public String generateMusic(@ToolParam(description = "User's description about the music") String description) {

@@ -1,7 +1,7 @@
 package com.copilot.musiccopilot.tools;
 
 import cn.hutool.core.io.FileUtil;
-import com.yupi.yuaiagent.constant.FileConstant;
+import com.copilot.musiccopilot.constant.FileConstant;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 

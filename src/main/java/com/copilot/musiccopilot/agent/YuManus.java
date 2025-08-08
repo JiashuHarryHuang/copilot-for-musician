@@ -1,6 +1,6 @@
 package com.copilot.musiccopilot.agent;
 
-import com.yupi.yuaiagent.advisor.MyLoggerAdvisor;
+import com.copilot.musiccopilot.advisor.MyLoggerAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallback;
