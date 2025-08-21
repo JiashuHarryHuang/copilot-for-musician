@@ -1,42 +1,47 @@
-# AI 音乐助理项目
+# AI Music Assistant Project
 
-## 项目简介
+## Project Overview
 
-本项目是一款专为音乐人打造的AI助理工具，集成了职业音乐人总结的丰富经验作为知识库，旨在帮助音乐人激发创作灵感，并在编曲和混音方面提供专业建议。
+This project is an AI assistant tool designed specifically for musicians. It integrates a rich knowledge base distilled from professional musicians’ experience, aiming to inspire creativity and provide expert advice in arrangement and mixing.
 
-## 核心功能
+## Core Features
 
-### 🎵 AI 音乐创作支持
-- 提供音乐创作灵感激发
-- 专业编曲建议
-- 混音技巧指导
-- 基于职业音乐人经验的知识库
+### 🎵 AI Music Creation Support
 
-### 🤖 多模型集成
-- 利用 Spring AI 框架快速接入多种 AI 大模型
-- 已支持通义、Deepseek 等主流模型
-- 提供统一的 API 调用接口
+* Inspiration generation for music creation
+* Professional arrangement suggestions
+* Mixing techniques guidance
+* Knowledge base built from professional musicians’ expertise
 
-### 📚 智能文档处理 (RAG)
-- 使用 PagePdfDocumentReader 处理音乐知识文档
-- 文档内容智能切片处理
-- 多模态模型转换文档图片为文字
-- Chroma 向量数据库存储与检索
+### 🤖 Multi-Model Integration
 
-### 🛠️ AI 工具扩展
-- 基于 Spring AI 工具调用注解实现多种功能：
-  - 文件操作工具
-  - 资源下载工具
-  - 音乐片段生成工具
-- 显著扩展 AI 的能力边界
+* Fast integration of multiple AI large models through the Spring AI framework
+* Already supports mainstream models such as Tongyi and DeepSeek
+* Provides a unified API interface for model calls
 
-## 技术栈
+### 📚 Intelligent Document Processing (RAG)
 
-- 后端框架：Spring AI
-- 向量数据库：Chroma
+* Uses `PagePdfDocumentReader` to process music knowledge documents
+* Smart content chunking for documents
+* Multimodal models convert document images into text
+* Stores and retrieves data via Chroma vector database
 
-## 未来计划
+### 🛠️ AI Tool Extensions
 
-- 集成更多音乐专业模型
-- 扩展支持的文档格式
-- AI助手本地操作编曲软件
+* Expands functionality using Spring AI tool-call annotations:
+
+  * File operation tools
+  * Resource download tools
+  * Music clip generation tools
+* Significantly extends the capabilities of the AI assistant
+
+## Tech Stack
+
+* Backend framework: Spring AI
+* Vector database: Chroma
+
+## Future Plans
+
+* Integrate more music-specific models
+* Extend supported document formats
+* Enable local AI assistant operations within music production software
