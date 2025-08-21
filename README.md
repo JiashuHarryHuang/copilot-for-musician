@@ -1,4 +1,4 @@
-# AI Music Assistant Project
+# AI Music Copilot Project
 
 ## Project Overview
 
